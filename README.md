@@ -12,5 +12,9 @@ APIs to be Used: edamam recipe searcher, edamam nutrition analysis
 
 
 Rough Breakdown of Tasks:
-Louis + Katy = Front end
-Lauryn + Josh = Back end logic
+Louis + Katy = Front End
+
+Lauryn + Josh = Back End Logic
+
+
+https://trello.com/b/jDv8BWq1/ideas-notes-apis
