@@ -1,34 +1,40 @@
-div{
-	border-radius: 25px;
-}
-img{
-	height: 50%;
-	width: 50%;
-	display: block;
-    margin: 0 auto;
-}
+div {
+  border-radius: 25px; }
 
-.nav{
-	background-color:#3c8ead;
-}
-.nav-link{
-	color:#fffffd;
-}
-.jumbotron{
-	margin-top: 10px;
-	border-radius: 18px 18px 18px 18px;
-	-moz-border-radius: 18px 18px 18px 18px;
-	-webkit-border-radius: 18px 18px 18px 18px;
-	border: 0px solid #000000;
-}
-.display-5{
-	text-align: center;
-}
-.card{
-	max-width: 30rem;
-}
-.diet, .ingredient{
-	-webkit-box-shadow: 11px -9px 5px 0px rgba(235,235,235,1);
-	-moz-box-shadow: 11px -9px 5px 0px rgba(235,235,235,1);
-	box-shadow: 11px -9px 5px 0px rgba(235,235,235,1);
-}
+img {
+  height: 50%;
+  width: 50%;
+  display: block;
+  margin: 0 auto; }
+
+.nav {
+  background-color: #3c8ead; }
+
+.nav-link {
+  color: #fffffd; }
+
+.jumbotron {
+  margin-top: 10px;
+  border-radius: 18px 18px 18px 18px;
+  -moz-border-radius: 18px 18px 18px 18px;
+  -webkit-border-radius: 18px 18px 18px 18px;
+  border: 0px solid #000000; }
+
+.display-5 {
+  text-align: center; }
+
+.card {
+  max-width: 30rem;
+  display: block;
+  margin: 0 auto;
+  border-radius: 18px 18px 18px 18px;
+  -moz-border-radius: 18px 18px 18px 18px;
+  -webkit-border-radius: 18px 18px 18px 18px;
+  border: 0px solid #000000; }
+
+.diet, .ingredient {
+  -webkit-box-shadow: 11px -9px 5px 0px #ebebeb;
+  -moz-box-shadow: 11px -9px 5px 0px #ebebeb;
+  box-shadow: 11px -9px 5px 0px #ebebeb; }
+
+/*# sourceMappingURL=style.css.map */
