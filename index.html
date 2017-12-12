@@ -14,10 +14,10 @@
   <body>
 	<!--Navigation Bar-->
 <div class="container">
-<ul class="nav" style="background-color:#ebebeb">
-  <li class="nav-item">
-    <a class="nav-link active" href="#">Home</a>
-  </li>
+  <ul class="nav" style="background-color:#ebebeb">
+    <li class="nav-item">
+      <a class="nav-link active" href="#">Home</a>
+    </li>
   <!--<li class="nav-item">
     <a class="nav-link" href="#">Link</a>
   </li>
@@ -29,7 +29,7 @@
   </li>
 -->
 </ul>
-<br></br>
+
 
 <div class="jumbotron jumbotron-fluid">
   <div class="container">
@@ -39,24 +39,37 @@
 </div>
 </div>
 
+<!-- start of introductory card groups: landing page -->
 <div class="card-group">
-	<div class="card border-primary mb-3" style="max-width: 20rem;">
-  <div class="card-header">Header</div>
-  <div class="card-body text-primary">
-    <h4 class="card-title">Primary card title</h4>
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+  <div class="card border-primary mb-3" id="pantryIntro" style="max-width: 20rem;">
+    <div class="card-header">Header</div>
+    <div class="card-body text-primary">
+      <h4 class="card-title">Primary card title</h4>
+      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+    </div>
   </div>
-</div>
-<div class="card border-secondary mb-3" style="max-width: 20rem;">
-  <div class="card-header">Header</div>
-  <div class="card-body text-secondary">
-    <h4 class="card-title">Secondary card title</h4>
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+  <div class="card border-secondary mb-3" id="restrictionsIntro" style="max-width: 20rem;">
+    <div class="card-header">Header</div>
+    <div class="card-body text-secondary">
+      <h4 class="card-title">Secondary card title</h4>
+      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+    </div>
   </div>
-</div>
-</div>
+</div><!--  ends card group -->
 
+<!-- start of next level, where pantry or restrictions lead to: -->
+<section id="ingredientsDiv">
+  <h2>I am a form</h2>
+  <p>You should see only me. I have high hopes to be a list of ingredient one can build upon and choose from</p>
+  <p>I will have a simple form like in giphy that will populate a list of things I have. I am kind of cute.</p>
+  <button class="home-btn">Home</button>
+</section>
 
+<section id="restrictionsDiv">
+  <h2>I am a fantastic list of restrictions</h2>
+  <p>You should see only me. I will have a few buttons that represent dietary restrictions. I am a little sad.</p>
+  <button class="home-btn">Home</button>
+</section>
 
 
 
@@ -67,6 +80,7 @@
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+    <script src="./assets/javascript/app.js"></script>
   </body>
 </html>
 
