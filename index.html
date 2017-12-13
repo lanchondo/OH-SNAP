@@ -69,9 +69,33 @@
   </section>
 
   <section id="restrictionsDiv">
-    <h2>I am a fantastic list of restrictions</h2>
-    <p>You should see only me. I will have a few buttons that represent dietary restrictions. I am a little sad.</p>
-    <button class="home-btn">Home</button>
+    <div class="panel panel-default">
+      <div class="panel-heading">Got restrictions?</div>
+      <div class="panel-body">
+          <form>
+              <div class="form-group">
+                <label for="main">Main ingredient</label>
+                <input type="text" class="form-control" id="mainIngredient"  placeholder="Enter main ingredient">
+                
+              </div>
+              <!-- ask josh for names of restrictions. use as data -->
+              <button class="dietBtn" data-diet="wheat">img</button>
+              <button class="dietBtn" data-diet="vego">img</button>
+              <button class="dietBtn" data-diet="paleo">img</button>
+              <button class="dietBtn" data-diet="diary">img</button>
+            </form>
+      </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">Try these, you picky beast!</div>
+        <div class="panel-body">
+            <div id="recipeHolder">
+              <!-- magic by josh -->
+
+            </div>
+        </div>
+      </div>
+    <button id="homeButton">Home</button>
   </section>
 
 </div>

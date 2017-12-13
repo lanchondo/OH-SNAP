@@ -14,13 +14,13 @@ $(document).ready(function(){
     $("#ingredientsDiv").show();
   });
 
-  $(".home-btn").on("click", goHome);
+  $("#homeButton").on("click", goHome);
 
-  function goHome(){
-    $("#restrictionsDiv").hide();
-    $("#ingredientsDiv").hide();
-    $("#pantryIntro").show();
-    $("#restrictionsIntro").show();
-  }
+  // function goHome(){
+  //   $("#restrictionsDiv").hide();
+  //   $("#ingredientsDiv").hide();
+  //   $("#pantryIntro").show();
+  //   $("#restrictionsIntro").show();
+  // }
   
   });

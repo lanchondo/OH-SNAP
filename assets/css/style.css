@@ -37,4 +37,11 @@ img {
   -moz-box-shadow: 11px -9px 5px 0px #ebebeb;
   box-shadow: 11px -9px 5px 0px #ebebeb; }
 
+.dietBtn {
+  width: 5em;
+  height: 5em;
+  border-radius: 50%;
+  border: 2px solid black;
+  background-color: #408eab; }
+
 /*# sourceMappingURL=style.css.map */

@@ -1,3 +1,13 @@
+//variables
+
+//mixins
+@mixin circle($s){
+  width: $s;
+  height: $s;
+  border-radius: 50%;
+  border: 2px solid black;
+}
+
 div{
 	border-radius: 25px;
 }
@@ -37,4 +47,9 @@ img{
 	-webkit-box-shadow: 11px -9px 5px 0px rgba(235,235,235,1);
 	-moz-box-shadow: 11px -9px 5px 0px rgba(235,235,235,1);
 	box-shadow: 11px -9px 5px 0px rgba(235,235,235,1);
+}
+
+.dietBtn {
+  @include circle(5em);
+  background-color: rgb(64, 142, 171);//get color from Louis
 }
