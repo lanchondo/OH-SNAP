@@ -26,6 +26,7 @@
             method: "GET"
           }).done(function(response) {
             console.log(response);
+            createRecipeCards(response);
         //trying to create paging for going to previous 10 or next 10 results
         //not adding functionality currently
             // $('.card-text').on('click', function() {
@@ -50,6 +51,27 @@
         //         }
         //     } 
         // }
+
+        function createRecipeCards(response){
+            $.each(response.hits, function(index, value){
+                $(".card-group").append(`
+                <div class="card border-primary mb-3" style="max-width: 20rem;">
+                <div class="card-header">${value.recipe.label}</div>
+                <div class="card-body text-primary">
+                <img src="${value.recipe.image}" alt="${value.recipe.label}" height="42" width="42">
+                  <h2 class="card-title">Total Calories:${parseInt(value.recipe.calories)}</h2>
+                  <h3 class="card-title">Individual Serving Calories:${parseInt(value.recipe.calories/value.recipe.yield)}</h3>
+                  <ul class="ingr-list"></ul> 
+                  <a href="${value.recipe.url}">Diretions to make this</a>
+                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                  </div>
+                  `)
+                  $.each(value.recipe.ingredients, function(index, value){
+                    $('.ingr-list').append(`<li>${value.text}</li>`)  
+                  })
+            });
+        }
+
       function pantryStorage(pantry){
           // Initialize Firebase
         var config = {
