@@ -1,7 +1,4 @@
-div {
-  border-radius: 25px; }
-
-img {
+.iconImg {
   height: 50%;
   width: 50%;
   display: block;
@@ -37,13 +34,6 @@ img {
   -moz-box-shadow: 11px -9px 5px 0px #ebebeb;
   box-shadow: 11px -9px 5px 0px #ebebeb; }
 
-.dietBtn {
-  width: 5em;
-  height: 5em;
-  border-radius: 50%;
-  border: 2px solid black;
-  background-color: #408eab; }
-
 .buttonload {
   background-color: #4CAF50;
   /* Green background */
@@ -60,5 +50,23 @@ img {
 .fa {
   margin-left: -12px;
   margin-right: 8px; }
+
+#hidden {
+  width: 5px; }
+
+.recipeCard {
+  box-shadow: 0 0 10px 3px #b3b1b3; }
+
+.cals {
+  font-size: 1.5em; }
+
+.cardGroup {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  align-items: flex-start; }
+
+.recipeLabel {
+  background-color: #F6406B; }
 
 /*# sourceMappingURL=style.css.map */

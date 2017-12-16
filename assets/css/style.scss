@@ -1,21 +1,23 @@
 //variables
+$white: #fafafa;
+$shadow:#b3b1b3;
+$purple: #7d32b5;
+$text: #675C52;
+$pink: #F6406B;
 
 //mixins
-@mixin circle($s){
-  width: $s;
-  height: $s;
-  border-radius: 50%;
-  border: 2px solid black;
+@mixin shadow ($h, $v, $blur, $spread, $color){
+  box-shadow: $h $v $blur $spread $color;
 }
 
-div{
-	border-radius: 25px;
-}
-img{
+.iconImg{
 	height: 50%;
 	width: 50%;
 	display: block;
-    margin: 0 auto;
+  margin: 0 auto;
+}
+.recipeImg {
+
 }
 
 .nav{
@@ -49,10 +51,6 @@ img{
 	box-shadow: 11px -9px 5px 0px rgba(235,235,235,1);
 }
 
-.dietBtn {
-  @include circle(5em);
-  background-color: rgb(64, 142, 171);//get color from Louis
-}
 
 //loading button play:
 .buttonload {
@@ -67,4 +65,26 @@ img{
 .fa {
   margin-left: -12px;
   margin-right: 8px;
+}
+
+#hidden {
+  width: 5px;
+}
+
+.recipeCard {
+  // display: inline-block;
+  @include shadow(0, 0, 10px, 3px, $shadow);
+}
+
+.cals {
+  font-size: 1.5em;
+}
+.cardGroup{
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
+.recipeLabel{
+  background-color: $pink;
 }

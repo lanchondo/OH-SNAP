@@ -1,7 +1,6 @@
-//click on food restriction icon and triggers api 
-//also has array of food ingredients for food search and food restriction diet
+
 $('.food-icon-restr').on('click', function() {
-  //diet retriction
+  //diet restriction
    var restrictDietChoice = this.id;
    //ingredients for recipe search
    var ingredients=["chicken","onion","apple"];
@@ -12,7 +11,7 @@ $('.food-icon-restr').on('click', function() {
    pantryStorage(pantry);
 });
 
-//runs retricted diet recipe search API
+//runs restricted diet recipe search API
 function runRestrictedDietAPI(restrictDietChoice, ingredients){
    var strIngredient = "";
    //concats array with wildcard for better api search
@@ -27,72 +26,34 @@ function runRestrictedDietAPI(restrictDietChoice, ingredients){
      }).done(function(response) {
        console.log(response);
        createRecipeCards(response);
-   //trying to create paging for going to previous 10 or next 10 results
-   //not adding functionality currently
-       // $('.card-text').on('click', function() {
-       //     pageResults(this.id,response);
-       // });
      });
      
 }
-//changes results
-//not adding functionality currently
-   // function pageResults(id,response){
-   //     if(id == "next"){
-   //         if(response.from == response.count - (response.count%10)){
-   //             console.log(response.to);
-   //             console.log(response.from);
-   //         }
-   //     }else{
-   //         //previous results
-   //         if(response.from > 10){
-   //             console.log(response.to);
-   //             console.log(response.from);
-   //         }
-   //     } 
-   // }
-
    function createRecipeCards(response){
+    $(".cardGroup").empty();
        $.each(response.hits, function(index, value){
-           $(".card-group").append(`
-           <div class="card border-primary mb-3" style="max-width: 20rem;">
-           <div class="card-header">${value.recipe.label}</div>
-           <div class="card-body text-primary">
-           <img src="${value.recipe.image}" alt="${value.recipe.label}" height="42" width="42">
-             <h2 class="card-title">Total Calories:${parseInt(value.recipe.calories)}</h2>
-             <h3 class="card-title">Individual Serving Calories:${parseInt(value.recipe.calories/value.recipe.yield)}</h3>
-             <ul class="ingr-list"></ul> 
-             <a href="${value.recipe.url}">Diretions to make this</a>
-             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-             </div>
+        var hits = index;
+          $(".cardGroup").append(`
+            <div class="recipeCard">
+              <div class="imgDiv">
+                <img src="${value.recipe.image}" alt="${value.recipe.label}">
+              </div>
+              <div class="recipeLabel"><h5>${value.recipe.label}</h5></div>
+              <p class = "cals">Individual Serving Calories:${parseInt(value.recipe.calories/value.recipe.yield)}</p>
+              <ul id="${index}">
+              </ul>
+              <button class="recipeBtn"><a href="${value.recipe.url}">Link to recipe</a></button>
+              <button class="nutBtn"><a href="#">Nutritional Value</a></button>
+              
+            </div>
              `)
              $.each(value.recipe.ingredients, function(index, value){
-               $('.ingr-list').append(`<li>${value.text}</li>`)  
-             })
+              $('#'+hits).append(`<li>${value.text}</li>`)  
+            })
        });
+       
    }
 
-//  function pantryStorage(pantry){
-//      // Initialize Firebase
-//    var config = {
-//        apiKey: "AIzaSyBk2pHNz0EinDznYAMc6g_quxiE5uByHzQ",
-//        authDomain: "fir-proj-fc54a.firebaseapp.com",
-//        databaseURL: "https://fir-proj-fc54a.firebaseio.com",
-//        projectId: "fir-proj-fc54a",
-//        storageBucket: "fir-proj-fc54a.appspot.com",
-//        messagingSenderId: "936997790614"
-//    };
-//    firebase.initializeApp(config);
-//    var database = firebase.database();
-//    $.each(pantry, function(index,value){
-//        var pantryItem = {
-//            item: value,
-//            dateAdded: firebase.database.ServerValue.TIMESTAMP
-//        }
-   
-//        database.ref("Pantry").push(pantryItem);
-//    })
-//  }
 
  // Pantry Code Below
 var pantry = [];
@@ -114,14 +75,13 @@ function pantryStorage(pantry){
             item: value,
             dateAdded: firebase.database.ServerValue.TIMESTAMP
         }
-
         database.ref("Pantry").push(pantryItem);
     console.log("pantry submitted");
     })
 }
 $("#pantry-input").on("click", function(event) {
   event.preventDefault();
-      // console.log($("#pantry-add").val().trim());
+
       pantry.push($("#pantry-add").val().trim());
       console.log(pantry);
       console.log("added to pantry");
@@ -129,7 +89,7 @@ $("#pantry-input").on("click", function(event) {
       $.each(pantry, function(index,value){
         $("#temporaryPantry").append(`<br> ${value}`);
       });
-      //add something tp clear out previour text
+
   });
 
 $("#pantry-submit").on("click", function(event) {
