@@ -1,16 +1,20 @@
 //click on food restriction icon and triggers api 
 //also has array of food ingredients for food search and food restriction diet
+
+//ingredients for recipe search
+var ingredients=[];
+
 $('.food-icon-restr').on('click', function() {
     console.log('clicked restrictDietChoice');
        //diet retriction
        var restrictDietChoice = this.id;
         //ingredients for recipe search
-        var ingredients=["chicken","onion","apple"];
+        // var ingredients=["chicken","onion","apple"];
         runRestrictedDietAPI(restrictDietChoice, ingredients);
         //items you have in stock to store in firebase
-        var pantry = ["garlic", "tomato", "potato", "beef", "celery"]
+        // var pantry = ["garlic", "tomato", "potato", "beef", "celery"]
         //adds pantry items to persisting source
-        pantryStorage(pantry);
+        // pantryStorage(pantry);
     });
 
 //runs retricted diet recipe search API
@@ -27,51 +31,30 @@ function runRestrictedDietAPI(restrictDietChoice, ingredients){
             method: "GET"
         }).done(function(response) {
             console.log(response);
-        //trying to create paging for going to previous 10 or next 10 results
-        //not adding functionality currently
-            // $('.card-text').on('click', function() {
-            //     pageResults(this.id,response);
-            // });
+            createRecipeCards(response);
         });
 
-    }
-    //changes results
-     //not adding functionality currently
-        // function pageResults(id,response){
-        //     if(id == "next"){
-        //         if(response.from == response.count - (response.count%10)){
-        //             console.log(response.to);
-        //             console.log(response.from);
-        //         }
-        //     }else{
-        //         //previous results
-        //         if(response.from > 10){
-        //             console.log(response.to);
-        //             console.log(response.from);
-        //         }
-        //     } 
-        // }
-      // function pantryStorage(pantry){
-      //     // Initialize Firebase
-      //   var config = {
-      //       apiKey: "AIzaSyBk2pHNz0EinDznYAMc6g_quxiE5uByHzQ",
-      //       authDomain: "fir-proj-fc54a.firebaseapp.com",
-      //       databaseURL: "https://fir-proj-fc54a.firebaseio.com",
-      //       projectId: "fir-proj-fc54a",
-      //       storageBucket: "fir-proj-fc54a.appspot.com",
-      //       messagingSenderId: "936997790614"
-      //   };
-      //   firebase.initializeApp(config);
-      //   var database = firebase.database();
-      //   $.each(pantry, function(index,value){
-      //       var pantryItem = {
-      //           item: value,
-      //           dateAdded: firebase.database.ServerValue.TIMESTAMP
-      //       }
+    };
 
-      //       database.ref("Pantry").push(pantryItem);
-      //   })
-      // }
+function createRecipeCards(response){
+    $.each(response.hits, function(index, value){
+        $(".card-group").append(`
+            <div class="card border-primary mb-3" style="max-width: 20rem;">
+            <div class="card-header">${value.recipe.label}</div>
+            <div class="card-body text-primary">
+            <img src="${value.recipe.image}" alt="${value.recipe.label}" height="42" width="42">
+            <h2 class="card-title">Total Calories:${parseInt(value.recipe.calories)}</h2>
+            <h3 class="card-title">Individual Serving Calories:${parseInt(value.recipe.calories/value.recipe.yield)}</h3>
+            <ul class="ingr-list"></ul> 
+            <a href="${value.recipe.url}">Diretions to make this</a>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            </div>
+            `)
+        $.each(value.recipe.ingredients, function(index, value){
+            $('.ingr-list').append(`<li>${value.text}</li>`)  
+        })
+    });
+}
 
 // Pantry Code Below
 var pantry = [];
@@ -119,7 +102,7 @@ $("#pantry-submit").on("click", function(event) {
 database.ref("Pantry").on("child_added", function(childSnapshot) {
     var item = childSnapshot.val().item;
     var key = childSnapshot.key;
-    $(".pantry-current").append(`<span class=pantry-item id=${key} >${item}<a href='javascript:void(0);' class='remove'>&times;</a><br><span>`);
+    $(".pantry-current").append(`<span class="pantry-item" id="${key}""><a href='javascript:void(0);' class='remove'>&times;</a>${item}<a href='javascript:void(0);' class='add'>&#10010;</a><br><span>`);
 });
 
 $(document).ready(function(){
@@ -128,6 +111,15 @@ $(document).ready(function(){
         removeID = $(this).parent().attr("id");
         database.ref("Pantry/" + removeID).remove();
         console.log(`Removed ID: ${removeID}`);
+    });
+    $(document).on("click", "a.add" , function() {
+        $(this).parent().css('background-color', 'gray');
+        var item = $(this).parent().text();
+        //remove the special characters fromt he beginning and end of the ingredient
+        item = item.slice(0, -1);
+        item = item.substr(1);
+        console.log(item);
+        ingredients.push(item);
     });
 });
 
