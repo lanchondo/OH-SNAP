@@ -79,15 +79,16 @@ function pantryStorage(pantry){
         database.ref("Pantry").push(pantryItem);
     });
     console.log(`pantry submitted`);
+    $("#temporaryPantry").empty();
 };
 
 $("#pantry-input").on("click", function(event) {
   event.preventDefault();
       // console.log($("#pantry-add").val().trim());
-      pantry.push($("#pantry-add").val().trim());
+      // pantry.push($("#pantry-add").val().trim());
+      pantry.push($("#basics").val().trim());
       console.log(pantry);
       console.log("added to pantry");
-      $("#temporaryPantry").empty();
       $.each(pantry, function(index,value){
         $("#temporaryPantry").append(`<br> ${value}`);
     });
@@ -124,7 +125,25 @@ $(document).ready(function(){
 });
 
 
-
+var input = document.getElementById("basics");
+var awesomeplete = new Awesomplete(input);
+function recipeapicallback(fillData) {
+    awesomeplete.list = fillData;
+}
+var inString;
+$('#basics').on('input', function() {
+     inString = $(this).val();
+    getAutocomplete(inString);
+});
+function getAutocomplete(inString){
+    var queryURL = `http://api.edamam.com/auto-complete?q=${inString}&limit=10&app_id=cb021850&app_key=3f0c4b8c9adcb08d63cbde97230db9f8&callback=recipeapicallback`
+    $.ajax({
+        url: queryURL,
+        method: "GET",
+        dataType: 'jsonp'
+      });
+    
+};
 
 
 
