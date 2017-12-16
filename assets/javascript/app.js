@@ -1,6 +1,7 @@
 //click on food restriction icon and triggers api 
 //also has array of food ingredients for food search and food restriction diet
 $('.food-icon-restr').on('click', function() {
+    console.log('clicked restrictDietChoice');
        //diet retriction
        var restrictDietChoice = this.id;
         //ingredients for recipe search
@@ -92,11 +93,11 @@ function pantryStorage(pantry){
             item: value,
             dateAdded: firebase.database.ServerValue.TIMESTAMP
         }
-
         database.ref("Pantry").push(pantryItem);
-    console.log("pantry submitted");
-    })
-}
+    });
+    console.log(`pantry submitted`);
+};
+
 $("#pantry-input").on("click", function(event) {
   event.preventDefault();
       // console.log($("#pantry-add").val().trim());
@@ -106,7 +107,7 @@ $("#pantry-input").on("click", function(event) {
       $("#temporaryPantry").empty();
       $.each(pantry, function(index,value){
         $("#temporaryPantry").append(`<br> ${value}`);
-      });
+    });
       //add something tp clear out previour text
   });
 
@@ -115,8 +116,20 @@ $("#pantry-submit").on("click", function(event) {
     pantryStorage(pantry);
 });
 
+database.ref("Pantry").on("child_added", function(childSnapshot) {
+    var item = childSnapshot.val().item;
+    var key = childSnapshot.key;
+    $(".pantry-current").append(`<span class=pantry-item id=${key} >${item}<a href='javascript:void(0);' class='remove'>&times;</a><br><span>`);
+});
 
-
+$(document).ready(function(){
+    $(document).on("click", "a.remove" , function() {
+        $(this).parent().remove();
+        removeID = $(this).parent().attr("id");
+        database.ref("Pantry/" + removeID).remove();
+        console.log(`Removed ID: ${removeID}`);
+    });
+});
 
 
 
