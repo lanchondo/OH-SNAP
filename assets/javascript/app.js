@@ -1,14 +1,11 @@
+//ingredients for recipe search
+var ingredients=[];
 
 $('.food-icon-restr').on('click', function() {
   //diet restriction
    var restrictDietChoice = this.id;
-   //ingredients for recipe search
-   var ingredients=["chicken","onion","apple"];
    runRestrictedDietAPI(restrictDietChoice, ingredients);
-   //items you have in stock to store in firebase
-   var pantry = ["garlic", "tomato", "potato", "beef"]
-   //adds pantry items to persisting source
-   pantryStorage(pantry);
+
 });
 
 //runs restricted diet recipe search API
@@ -76,20 +73,21 @@ function pantryStorage(pantry){
             dateAdded: firebase.database.ServerValue.TIMESTAMP
         }
         database.ref("Pantry").push(pantryItem);
-    console.log("pantry submitted");
-    })
-}
+    });
+    console.log(`pantry submitted`);
+    $("#temporaryPantry").empty();
+};
+
 $("#pantry-input").on("click", function(event) {
   event.preventDefault();
-
+      // console.log($("#pantry-add").val().trim());
       pantry.push($("#pantry-add").val().trim());
       console.log(pantry);
       console.log("added to pantry");
-      $("#temporaryPantry").empty();
       $.each(pantry, function(index,value){
         $("#temporaryPantry").append(`<br> ${value}`);
-      });
-
+    });
+      //add something tp clear out previour text
   });
 
 $("#pantry-submit").on("click", function(event) {
@@ -97,3 +95,26 @@ $("#pantry-submit").on("click", function(event) {
     pantryStorage(pantry);
 });
 
+database.ref("Pantry").on("child_added", function(childSnapshot) {
+    var item = childSnapshot.val().item;
+    var key = childSnapshot.key;
+    $(".pantry-current").append(`<span class="pantry-item" id="${key}""><a href='javascript:void(0);' class='remove'>&times;</a>${item}<a href='javascript:void(0);' class='add'>&#10010;</a><br><span>`);
+});
+
+$(document).ready(function(){
+    $(document).on("click", "a.remove" , function() {
+        $(this).parent().remove();
+        removeID = $(this).parent().attr("id");
+        database.ref("Pantry/" + removeID).remove();
+        console.log(`Removed ID: ${removeID}`);
+    });
+    $(document).on("click", "a.add" , function() {
+        $(this).parent().css('background-color', 'gray');
+        var item = $(this).parent().text();
+        //remove the special characters from the beginning and end of the ingredient
+        item = item.slice(0, -1);
+        item = item.substr(1);
+        console.log(item);
+        ingredients.push(item);
+    });
+});

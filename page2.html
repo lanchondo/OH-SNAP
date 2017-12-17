@@ -44,19 +44,15 @@
 
       <!-- LAURYN'S FIREBASE -->
       <div class="container">
-        <!-- FORM -->
-        <div class="form-group">
-          <label for="pantry-add">Pantry Item:</label>
-          <input class="form-control" id="pantry-add" type="text">
-        </div><!-- END FORM -->
-        <!-- adds to the list -->
-        <button class="btn" id="pantry-input" type="submit">Add Item</button>
-
-        <div id="temporaryPantry">
-          <!-- list from pantry form -->
-        </div>
-        <!-- adds list to firebase -->
-        <button class="btn" id="pantry-submit" type="submit">Add All Items to Pantry</button>
+          <div class="form-group">
+            <label for="pantry-add">Pantry Item:</label>
+            <input class="form-control" id="pantry-add" type="text">
+          </div>
+          <button class="btn" id="pantry-input" type="submit">Add Item</button>
+          <div id="temporaryPantry"></div>
+          <button class="btn" id="pantry-submit" type="submit">Add All Items to Pantry</button>
+          <br>
+          <div class="pantry-current"><h3>These items are currently in your pantry. Click "&times;" to remove an item. Click "&#10010;" to add it to your ingredients search.</h3></div>
       </div>
 
 
