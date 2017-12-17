@@ -119,3 +119,76 @@ function getAutocomplete(inString){
             database.ref("Pantry").push(pantryItem);
         })
       }
+
+      // Pantry Code Below
+var pantry = [];
+// Initialize Firebase
+var config = {
+    apiKey: "AIzaSyBk2pHNz0EinDznYAMc6g_quxiE5uByHzQ",
+    authDomain: "fir-proj-fc54a.firebaseapp.com",
+    databaseURL: "https://fir-proj-fc54a.firebaseio.com",
+    projectId: "fir-proj-fc54a",
+    storageBucket: "fir-proj-fc54a.appspot.com",
+    messagingSenderId: "936997790614"
+};
+firebase.initializeApp(config);
+var database = firebase.database();
+
+function pantryStorage(pantry){
+    $.each(pantry, function(index,value){
+        var pantryItem = {
+            item: value,
+            dateAdded: firebase.database.ServerValue.TIMESTAMP
+        }
+        database.ref("Pantry").push(pantryItem);
+    });
+    console.log(`pantry submitted`);
+    $("#temporaryPantry").empty();
+};
+
+$("#pantry-input").on("click", function(event) {
+  event.preventDefault();
+      // console.log($("#pantry-add").val().trim());
+      // pantry.push($("#pantry-add").val().trim());
+      pantry.push($("#basics").val().trim());
+      console.log(pantry);
+      console.log("added to pantry");
+      $.each(pantry, function(index,value){
+        $("#temporaryPantry").append(`<br> ${value}`);
+    });
+      //add something tp clear out previour text
+  });
+
+$("#pantry-submit").on("click", function(event) {
+    console.log("submitting pantry...");
+    pantryStorage(pantry);
+});
+
+database.ref("Pantry").on("child_added", function(childSnapshot) {
+    var expirationDT = moment().subtract(7, 'days').format('YYYY/MM/DD HH:mm:ss');
+    var item = childSnapshot.val().item;
+    var key = childSnapshot.key;
+    if(moment(childSnapshot.val().dateAdded).format('YYYY/MM/DD HH:mm:ss') < expirationDT){
+        $(".pantry-current").append(`<span class="pantry-item" id="${key}""><a href='javascript:void(0);' class='remove'>&times;</a>${item} Please check item for freshness!<a href='javascript:void(0);' class='add'>&#10010;</a><br><span>`);
+    }else{
+        $(".pantry-current").append(`<span class="pantry-item" id="${key}""><a href='javascript:void(0);' class='remove'>&times;</a>${item}<a href='javascript:void(0);' class='add'>&#10010;</a><br><span>`);
+    }
+});
+
+$(document).ready(function(){
+    $(document).on("click", "a.remove" , function() {
+        $(this).parent().remove();
+        removeID = $(this).parent().attr("id");
+        database.ref("Pantry/" + removeID).remove();
+        console.log(`Removed ID: ${removeID}`);
+    });
+    $(document).on("click", "a.add" , function() {
+        $(this).parent().css('background-color', 'gray');
+        var item = $(this).parent().text();
+        //remove the special characters fromt he beginning and end of the ingredient
+        item = item.slice(0, -1);
+        item = item.substr(1);
+        console.log(item);
+        ingredients.push(item);
+    });
+});

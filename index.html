@@ -58,6 +58,20 @@
 </div>
 </div>
 
+<div class="container">
+  <div class="form-group">
+    <label for="pantry-add">Pantry Item:</label>
+    <!-- <input class="form-control" id="pantry-add" type="text"> -->
+
+    <input class="form-control" id="basics" type="text">
+  </div>
+  <button class="btn" id="pantry-input" type="submit">Add Item</button>
+  <div id="temporaryPantry"></div>
+  <button class="btn" id="pantry-submit" type="submit">Add All Items to Pantry</button>
+  <br>
+  <div class="pantry-current"><h3>These items are currently in your pantry. Click "&times;" to remove an item. Click "&#10010;" to add it to your ingredients search.</h3></div>
+</div>
+
 
 
 
@@ -75,7 +89,7 @@
     src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
     integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
     crossorigin="anonymous"></script>
-    
+    <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
     <script src="assets/javascript/awesomplete.js"></script>
     <script src="assets/javascript/app.js"></script>
   </body>
