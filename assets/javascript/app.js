@@ -1,11 +1,12 @@
+//click on food restriction icon and triggers api 
+//also has array of food ingredients for food search and food restriction diet
+
 //ingredients for recipe search
 var ingredients=[];
 
 $('.food-icon-restr').on('click', function() {
-  //diet restriction
    var restrictDietChoice = this.id;
    runRestrictedDietAPI(restrictDietChoice, ingredients);
-
 });
 
 //runs restricted diet recipe search API
@@ -15,19 +16,17 @@ function runRestrictedDietAPI(restrictDietChoice, ingredients){
    $.each(ingredients, function(index,value){
        strIngredient += value +"%20";
    })
-   console.log(strIngredient);
    var queryURL = `https://api.edamam.com/search?q=${strIngredient}&health=${restrictDietChoice}&app_id=2e4ce701&app_key=20b246a2d182f864dd85c155afc277d3`
    $.ajax({
        url: queryURL,
        method: "GET"
      }).done(function(response) {
-       console.log(response);
        createRecipeCards(response);
-     });
-     
-}
+     });    
+};
+
    function createRecipeCards(response){
-    $(".cardGroup").empty();
+    // $(".cardGroup").empty();
        $.each(response.hits, function(index, value){
         var hits = index;
           $(".cardGroup").append(`
@@ -35,20 +34,20 @@ function runRestrictedDietAPI(restrictDietChoice, ingredients){
               <div class="imgDiv">
                 <img src="${value.recipe.image}" alt="${value.recipe.label}">
               </div>
-              <div class="recipeLabel"><h5>${value.recipe.label}</h5></div>
+              <div class="recipeLabel">
+                <h5>${value.recipe.label}</h5>
+              </div>
               <p class = "cals">Individual Serving Calories:${parseInt(value.recipe.calories/value.recipe.yield)}</p>
               <ul id="${index}">
               </ul>
-              <button class="recipeBtn"><a href="${value.recipe.url}">Link to recipe</a></button>
-              <button class="nutBtn"><a href="#">Nutritional Value</a></button>
-              
+              <button class="recipeBtn"><a href="${value.recipe.url}">Link to source</a></button>
+              <button class="nutBtn"><a href="#">Nutritional Value</a></button>  
             </div>
              `)
-             $.each(value.recipe.ingredients, function(index, value){
+            $.each(value.recipe.ingredients, function(index, value){
               $('#'+hits).append(`<li>${value.text}</li>`)  
             })
-       });
-       
+       });   
    }
 
 
