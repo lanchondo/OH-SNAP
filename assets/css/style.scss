@@ -10,14 +10,10 @@ $pink: #F6406B;
   box-shadow: $h $v $blur $spread $color;
 }
 
-.iconImg{
-	height: 50%;
-	width: 50%;
-	display: block;
-  margin: 0 auto;
-}
-.recipeImg {
-
+//GLOBALS
+a {
+  text-decoration: none;
+  color: $white;
 }
 
 .nav{
@@ -33,6 +29,12 @@ $pink: #F6406B;
 	-webkit-border-radius: 18px 18px 18px 18px;
 	border: 0px solid #000000;
 }
+
+.testBox {
+  border: 1px solid black;
+}
+
+
 .display-5{
 	text-align: center;
 }
@@ -45,31 +47,78 @@ $pink: #F6406B;
 	-webkit-border-radius: 18px 18px 18px 18px;
 	border: 0px solid #000000;
 }
-.diet, .ingredient{
-	-webkit-box-shadow: 11px -9px 5px 0px rgba(235,235,235,1);
-	-moz-box-shadow: 11px -9px 5px 0px rgba(235,235,235,1);
-	box-shadow: 11px -9px 5px 0px rgba(235,235,235,1);
-}
 
 
-//loading button play:
-.buttonload {
-  background-color: #4CAF50; /* Green background */
-  border: none; /* Remove borders */
-  color: white; /* White text */
-  padding: 12px 24px; /* Some padding */
-  font-size: 16px; /* Set a font-size */
+button {
+  background-color: $purple;
+  border: 1px solid $text;
+  border-radius: 10px;
+  color: $white;
 }
 
-/* Add a right margin to each icon */
-.fa {
-  margin-left: -12px;
-  margin-right: 8px;
+//FIRST PAGE 
+.divHolder {
+  display: flex;
+  flex-direction: column;
+  @media screen and (min-width: 768px){
+    flex-direction: row;
+    align-items: stretch;
+    justify-content: space-between;
+  }
 }
+.icon, .intro {
+  -webkit-box-shadow: 11px -9px 5px 0px rgba(235,235,235,1);
+  -moz-box-shadow: 11px -9px 5px 0px rgba(235,235,235,1);
+  box-shadow: 11px -9px 5px 0px rgba(235,235,235,1);
+  @media screen and (min-width: 768px) {
+    flex: 0 1 48%;
+  }
+}
+.intro {
+  padding: 0.5em;
+  @media screen and (min-width: 768px) {
+    padding: 1em;
+  }
+  @media screen and (min-width: 768px) {
+    padding: 2em;
+  }
+}
+.introText {
+  font-size: 1em;
+  @media screen and (min-width: 440px){
+    font-size: 1.25em;
+  }
+}
+.icon {
+  padding: 2em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  @media screen and (min-width: 440px){
+    padding: 1.5em;
+  }
 
-#hidden {
-  width: 5px;
 }
+#circleBtn {
+  width: 10em;
+  height: 10em;
+  border-radius: 50%;
+  -webkit-animation-duration: 500ms;
+  -moz-animation-duration:500ms;
+  animation-duration: 500ms;
+  
+  &:hover {
+    cursor: pointer;
+  }
+}
+.iconImg{
+	width: 100%;
+}
+.hover{
+  background-color: black;
+}
+//SECOND PAGE (THE API FIREBASE MONEY)
 
 .recipeCard {
   // display: inline-block;

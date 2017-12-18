@@ -1,3 +1,14 @@
+// STYLE RELATED F(X):
+$(function() 
+  {
+    $("#circleBtn").mouseenter(function(e) {
+        $(this).addClass("animated pulse");
+        
+    });
+    $("#circleBtn").on("webkitAnimationEnd mozAnimationEnd oAnimationEnd animationEnd", function(e) {
+        $(this).removeClass("animated pulse");
+    });
+  });
 //click on food restriction icon and triggers api 
 //also has array of food ingredients for food search and food restriction diet
 
@@ -117,3 +128,6 @@ $(document).ready(function(){
         ingredients.push(item);
     });
 });
+
+
+
