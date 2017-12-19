@@ -1,14 +1,14 @@
-// // STYLE RELATED F(X):
-// $(function() 
-//   {
-//     $("#circleBtn").mouseenter(function(e) {
-//         $(this).addClass("animated pulse");
+// STYLE RELATED F(X):
+$(function() 
+  {
+    $("#circleBtn").mouseenter(function(e) {
+        $(this).addClass("animated pulse");
         
-//     });
-//     $("#circleBtn").on("webkitAnimationEnd mozAnimationEnd oAnimationEnd animationEnd", function(e) {
-//         $(this).removeClass("animated pulse");
-//     });
-//   });
+    });
+    $("#circleBtn").on("webkitAnimationEnd mozAnimationEnd oAnimationEnd animationEnd", function(e) {
+        $(this).removeClass("animated pulse");
+    });
+  });
 
 //click on food restriction icon and triggers api 
 //also has array of food ingredients for food search and food restriction diet
@@ -86,16 +86,18 @@ function pantryStorage(pantry){
         database.ref("Pantry").push(pantryItem);
     });
     $("#temporaryPantry").empty();
+    console.log('temp pantry emptied')
 };
 
 $("#pantry-input").on("click", function(event) {
   event.preventDefault();
       // console.log($("#pantry-add").val().trim());
+    $("#temporaryPantry").empty();
       pantry.push($("#basics").val().trim());
       console.log(pantry);
       console.log("added to pantry");
       $.each(pantry, function(index,value){
-        $("#temporaryPantry").append(`<li> ${value}</li>`);
+        $("#temporaryPantry").append(`<li><i class="fa fa-cutlery" aria-hidden="true"></i> ${value}</li>`);
     });
       //add something tp clear out previour text
   });
@@ -110,9 +112,9 @@ database.ref("Pantry").on("child_added", function(childSnapshot) {
     var item = childSnapshot.val().item;
     var key = childSnapshot.key;
     if(moment(childSnapshot.val().dateAdded).format('YYYY/MM/DD HH:mm:ss') < expirationDT){
-        $(".pantry-current").append(`<span class="pantry-item spoiled" id="${key}"">Please check item for freshness! <a href='javascript:void(0);' class='remove'>&times;</a>${item}<a href='javascript:void(0);' class='add'>&#10010;</a><br><span>`);
+        $(".pantry-current").append(`<span class="pantry-item spoiled" id="${key}""><a href='javascript:void(0);' class='remove'>&times;</a>${item}<a href='javascript:void(0);' class='add'>&#10010;</a><span>`);
     }else{
-        $(".pantry-current").append(`<span class="pantry-item" id="${key}""><a href='javascript:void(0);' class='remove'>&times;</a>${item}<a href='javascript:void(0);' class='add'>&#10010;</a><br><span>`);
+        $(".pantry-current").append(`<span class="pantry-item" id="${key}""><a href='javascript:void(0);' class='remove'>&times;</a>${item}<a href='javascript:void(0);' class='add'>&#10010;</a><span>`);
     }
 });
 

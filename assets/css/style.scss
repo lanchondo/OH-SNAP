@@ -48,7 +48,7 @@ a {
   -webkit-border-radius: 4px;
   border-radius: 4px;
   border: 0px solid #000000;
-  
+
 }
 .snap {
   font-family: 'Life Savers', cursive;
@@ -100,7 +100,7 @@ footer {
     color: $white;
 	}
 }
-//FIRST PAGE 
+//FIRST PAGE
 .divHolder {
   display: flex;
   flex-direction: column;
@@ -156,7 +156,7 @@ footer {
   -webkit-animation-iteration-count: 3;
   -moz-animation-iteration-count: 3;
   animation-iteration-count: 3;
-  
+
   &:hover {
     cursor: pointer;
   }
@@ -209,7 +209,7 @@ footer {
   padding: 1em;
   display: flex;
   flex-direction: column;
-  
+
 }
 .cals {
   font-size: 1.5em;
