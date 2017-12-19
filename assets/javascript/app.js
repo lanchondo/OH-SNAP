@@ -84,7 +84,6 @@ function pantryStorage(pantry){
         }
         database.ref("Pantry").push(pantryItem);
     });
-    console.log(`pantry submitted`);
     $("#temporaryPantry").empty();
 };
 
@@ -95,9 +94,10 @@ $("#pantry-input").on("click", function(event) {
       console.log(pantry);
       console.log("added to pantry");
       $.each(pantry, function(index,value){
-        $("#temporaryPantry").append(`<br> ${value}`);
+        $("#temporaryPantry").append(`<li> ${value}</li>`);
     });
       //add something tp clear out previour text
+      
   });
 
 $("#pantry-submit").on("click", function(event) {

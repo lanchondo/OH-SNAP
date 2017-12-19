@@ -13,21 +13,31 @@
     src=“https://code.jquery.com/ui/1.12.1/jquery-ui.min.js”
     integrity=“sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=”
     crossorigin=“anonymous”></script> -->
+<!-- font awesome!!! -->
 
     <!-- autocompete -->
     <link rel="stylesheet" href="./assets/css/awesomplete.css"/>
     <script src="./assets/javascript/awesomplete.js"></script>
     <!--Style CSS-->
     <link rel="stylesheet" type="text/css" href="./assets/css/style.css">
+    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
   </head>
+
+
+
   <body>
+    <div id="wrap">
     <!--Navigation Bar-->
+    <div>
+      <ul class="nav">
+      <li class="nav-item">
+        <a class="nav-link" href="./index.html">Home</a>
+      </li>
+      </ul>
+    </div>
+   
     <div class="container">
-        <ul class="nav">
-          <li class="nav-item">
-            <a class="nav-link active" href="./index.html">Home</a>
-          </li>
-        </ul>
+        
       
       <!--Jumbotron-->
       <div class="jumbotron jumbotron-fluid">
@@ -42,34 +52,64 @@
       
 
       <!-- LAURYN'S FIREBASE -->
-      <div class="container testBox">
+      <!-- start search box -->
+      <div class="container searchBox">
           <div class="form-group">
-            <label for="pantry-add">Pantry Item:</label>
-            <input class="form-control" id="pantry-add" type="text">
+            <label for="pantry-add">Enter Pantry Item:</label>
+            <div class="pantryForm">
+              <input id="pantry-add" type="text">
+              <button class="btn pantryBtn" id="pantry-input" type="submit">Add Item</button>
+            </div>
           </div>
-          <button class="btn pantryBtn" id="pantry-input" type="submit">Add Item</button>
-          <div id="temporaryPantry"></div>
-          <button class="btn" id="pantry-submit" type="submit">Add All Items to Pantry</button>
-          <br>
-          <div class="pantry-current"><h3>These items are currently in your pantry. Click "&times;" to remove an item. Click "&#10010;" to add it to your ingredients search.</h3></div>
-      </div>
+          
+          <div class="pantryBtnDiv">
+            <h6>Pantry content:</h6>
+            <button class="btn" id="pantry-submit" type="submit">Add All</button>
+          </div>
+          <div class="pantryList">
+            <div>
+              <ul id="temporaryPantry">
+
+              </ul>
+            </div>
+          </div>
+            
+      </div><!-- END search box -->
+
+            <!-- PANTRY SEARCH -->
+          <div class="pantrySearch">
+            <!-- LAURYN'S FIREBASE -->
+            <div class="pantry-current">
+              <p>These items are currently in your pantry. Click "&times;" to remove an item. Click "&#10010;" to add it to your ingredients search.</p>
+            </div>
+             <!-- JOSH'S API -->
+            <div class="recSearch">
+              <h6>Think you&apos;re ready?</h6>
+              <div class="card-body text-secondary">
+                <button class="food-icon-restr" id="peanut-free">Oh, Snap!</button>
+              </div>
+            </div>
+          </div><!--  end pantry search -->
+
+          <!-- cards fill here: -->
+          <div class="cardGroup"></div>
 
 
-<!-- JOSH'S API -->
+     
+      
+    </section>
 
-      <div class="cardGroup testBox">
-        <div class="card border-secondary">
-          <div class="card-header">Header</div>
-          <div class="card-body text-secondary">
-            <button class="food-icon-restr" id="peanut-free">Oh, Snap!</button>
+
+    </div>
+  </div>
+
+    <footer>
+        <div class="container">
+          <div class="row">
+              <p>Joshua Wise | Katy Cassidy | Lauryn McFarland | Louis Anchondo</p>
           </div>
         </div>
-        <button class="home-btn"><a href="./index.html">Home</a></button>
-    </section>
-    </div>
-
-
-
+    </footer>
 
 
 
