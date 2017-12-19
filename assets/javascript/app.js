@@ -1,3 +1,15 @@
+// // STYLE RELATED F(X):
+// $(function() 
+//   {
+//     $("#circleBtn").mouseenter(function(e) {
+//         $(this).addClass("animated pulse");
+        
+//     });
+//     $("#circleBtn").on("webkitAnimationEnd mozAnimationEnd oAnimationEnd animationEnd", function(e) {
+//         $(this).removeClass("animated pulse");
+//     });
+//   });
+
 //click on food restriction icon and triggers api 
 //also has array of food ingredients for food search and food restriction diet
 
@@ -5,58 +17,53 @@
 var ingredients=[];
 
 $('.food-icon-restr').on('click', function() {
-    console.log('clicked restrictDietChoice');
-       //diet retriction
-       var restrictDietChoice = this.id;
-        //ingredients for recipe search
-        // var ingredients=["chicken","onion","apple"];
-        runRestrictedDietAPI(restrictDietChoice, ingredients);
-        //items you have in stock to store in firebase
-        // var pantry = ["garlic", "tomato", "potato", "beef", "celery"]
-        //adds pantry items to persisting source
-        // pantryStorage(pantry);
-    });
+   var restrictDietChoice = this.id;
+   runRestrictedDietAPI(restrictDietChoice, ingredients);
+});
 
-//runs retricted diet recipe search API
+//runs restricted diet recipe search API
 function runRestrictedDietAPI(restrictDietChoice, ingredients){
-    var strIngredient = "";
-        //concats array with wildcard for better api search
-        $.each(ingredients, function(index,value){
-            strIngredient += value +"%20";
-        })
-        console.log(strIngredient);
-        var queryURL = `https://api.edamam.com/search?q=${strIngredient}&health=${restrictDietChoice}&app_id=2e4ce701&app_key=20b246a2d182f864dd85c155afc277d3`
-        $.ajax({
-            url: queryURL,
-            method: "GET"
-        }).done(function(response) {
-            console.log(response);
-            createRecipeCards(response);
-        });
+   var strIngredient = "";
+   //concats array with wildcard for better api search
+   $.each(ingredients, function(index,value){
+       strIngredient += value +"%20";
+   })
+   var queryURL = `https://api.edamam.com/search?q=${strIngredient}&health=${restrictDietChoice}&app_id=2e4ce701&app_key=20b246a2d182f864dd85c155afc277d3`
+   $.ajax({
+       url: queryURL,
+       method: "GET"
+     }).done(function(response) {
+       createRecipeCards(response);
+     });    
+};
 
-    };
-
-function createRecipeCards(response){
-    $.each(response.hits, function(index, value){
-        $(".card-group").append(`
-            <div class="card border-primary mb-3" style="max-width: 20rem;">
-            <div class="card-header">${value.recipe.label}</div>
-            <div class="card-body text-primary">
-            <img src="${value.recipe.image}" alt="${value.recipe.label}" height="42" width="42">
-            <h2 class="card-title">Total Calories:${parseInt(value.recipe.calories)}</h2>
-            <h3 class="card-title">Individual Serving Calories:${parseInt(value.recipe.calories/value.recipe.yield)}</h3>
-            <ul class="ingr-list"></ul> 
-            <a href="${value.recipe.url}">Diretions to make this</a>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+   function createRecipeCards(response){
+    // $(".cardGroup").empty();
+       $.each(response.hits, function(index, value){
+        var hits = index;
+          $(".cardGroup").append(`
+            <div class="recipeCard">
+              <div class="imgDiv">
+                <img src="${value.recipe.image}" alt="${value.recipe.label}">
+              </div>
+              <div class="recipeLabel">
+                <h5>${value.recipe.label}</h5>
+              </div>
+              <p class = "cals">Individual Serving Calories:${parseInt(value.recipe.calories/value.recipe.yield)}</p>
+              <ul id="${index}">
+              </ul>
+              <button class="recipeBtn"><a href="${value.recipe.url}">Link to source</a></button>
+              <button class="nutBtn"><a href="#">Nutritional Value</a></button>  
             </div>
-            `)
-        $.each(value.recipe.ingredients, function(index, value){
-            $('.ingr-list').append(`<li>${value.text}</li>`)  
-        })
-    });
-}
+             `)
+            $.each(value.recipe.ingredients, function(index, value){
+              $('#'+hits).append(`<li>${value.text}</li>`)  
+            })
+       });   
+   }
 
-// Pantry Code Below
+
+ 
 var pantry = [];
 // Initialize Firebase
 var config = {
@@ -78,19 +85,17 @@ function pantryStorage(pantry){
         }
         database.ref("Pantry").push(pantryItem);
     });
-    console.log(`pantry submitted`);
     $("#temporaryPantry").empty();
 };
 
 $("#pantry-input").on("click", function(event) {
   event.preventDefault();
       // console.log($("#pantry-add").val().trim());
-      // pantry.push($("#pantry-add").val().trim());
       pantry.push($("#basics").val().trim());
       console.log(pantry);
       console.log("added to pantry");
       $.each(pantry, function(index,value){
-        $("#temporaryPantry").append(`<br> ${value}`);
+        $("#temporaryPantry").append(`<li> ${value}</li>`);
     });
       //add something tp clear out previour text
   });
@@ -121,14 +126,13 @@ $(document).ready(function(){
     $(document).on("click", "a.add" , function() {
         $(this).parent().css('background-color', 'gray');
         var item = $(this).parent().text();
-        //remove the special characters fromt he beginning and end of the ingredient
+        //remove the special characters from the beginning and end of the ingredient
         item = item.slice(0, -1);
         item = item.substr(1);
         console.log(item);
         ingredients.push(item);
     });
 });
-
 
 var input = document.getElementById("basics");
 var awesomeplete = new Awesomplete(input);
@@ -149,29 +153,3 @@ function getAutocomplete(inString){
       });
     
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -1,1 +1,191 @@
+html, body {
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  font-family: 'Magra', sans-serif; }
 
+body {
+  background-color: #e9e9e9; }
+
+a {
+  text-decoration: none;
+  color: #fafafa; }
+
+#wrap {
+  min-height: 100%;
+  height: auto;
+  margin: 0 auto -50px;
+  padding: 0 0 50px; }
+
+.nav {
+  background-color: #F6406B;
+  width: 100%; }
+
+.nav-link {
+  color: #fffffd; }
+
+.jumbotron {
+  background-color: #7d32b5;
+  margin-top: 10px;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+  border: 0px solid #000000; }
+
+.snap {
+  font-family: 'Life Savers', cursive;
+  color: #fafafa;
+  font-size: 2.5em; }
+  @media screen and (min-width: 550px) {
+    .snap {
+      font-size: 4.5em; } }
+  @media screen and (min-width: 992px) {
+    .snap {
+      font-size: 6.5em; } }
+
+.testBox {
+  border: 1px solid black; }
+
+.display-5 {
+  text-align: center; }
+
+.card {
+  max-width: 30rem;
+  display: block;
+  margin: 0 auto;
+  border-radius: 18px 18px 18px 18px;
+  -moz-border-radius: 18px 18px 18px 18px;
+  -webkit-border-radius: 18px 18px 18px 18px;
+  border: 0px solid #000000; }
+
+button {
+  background-color: #7d32b5;
+  border: 1px solid #675C52;
+  border-radius: 10px;
+  color: #fafafa; }
+
+footer {
+  background-color: #F6406B;
+  width: 100%;
+  height: 50px;
+  text-align: center;
+  margin: 0 auto; }
+  footer p {
+    padding-top: 0.5em;
+    margin: 0 auto;
+    color: #fafafa; }
+
+.divHolder {
+  display: flex;
+  flex-direction: column; }
+  @media screen and (min-width: 768px) {
+    .divHolder {
+      flex-direction: row;
+      align-items: stretch;
+      justify-content: space-between; } }
+
+.icon, .intro {
+  background-color: #fafafa;
+  border-radius: 5px; }
+  @media screen and (min-width: 768px) {
+    .icon, .intro {
+      flex: 0 1 49%; } }
+
+.intro {
+  padding: 0.5em; }
+  @media screen and (min-width: 768px) {
+    .intro {
+      padding: 1em; } }
+  @media screen and (min-width: 768px) {
+    .intro {
+      padding: 2em; } }
+
+.introText {
+  font-size: 1em; }
+  @media screen and (min-width: 440px) {
+    .introText {
+      font-size: 1.25em; } }
+
+.icon {
+  padding: 2em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; }
+  @media screen and (min-width: 440px) {
+    .icon {
+      padding: 1.5em; } }
+
+#circleBtn {
+  width: 10em;
+  height: 10em;
+  border-radius: 50%;
+  -webkit-animation-duration: 700ms;
+  -moz-animation-duration: 700ms;
+  animation-duration: 700ms;
+  -webkit-animation-iteration-count: 3;
+  -moz-animation-iteration-count: 3;
+  animation-iteration-count: 3; }
+  #circleBtn:hover {
+    cursor: pointer; }
+
+.iconImg {
+  width: 90%;
+  margin: 0 auto; }
+
+.hover {
+  background-color: black; }
+
+.searchBox {
+  background-color: #fafafa;
+  display: flex;
+  flex-direction: column;
+  padding: 1em; }
+
+.pantryForm {
+  display: flex;
+  justify-content: space-between; }
+
+.pantryBtnDiv {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding-top: 0.5em; }
+
+#temporaryPantry {
+  flex-basis: 50%; }
+
+#pantry-add {
+  flex-basis: 70%; }
+
+.recipeCard {
+  box-shadow: 0 0 10px 3px #b3b1b3; }
+
+.pantrySearch {
+  background-color: #fafafa;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1em; }
+
+.pantry-current {
+  flex-basis: 58%;
+  padding: 1em; }
+
+.recSearch {
+  padding: 1em;
+  display: flex;
+  flex-direction: column; }
+
+.cals {
+  font-size: 1.5em; }
+
+.cardGroup {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  align-items: flex-start; }
+
+.recipeLabel {
+  background-color: #F6406B; }
+
+/*# sourceMappingURL=style.css.map */
