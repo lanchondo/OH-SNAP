@@ -1,14 +1,15 @@
-// STYLE RELATED F(X):
-$(function() 
-  {
-    $("#circleBtn").mouseenter(function(e) {
-        $(this).addClass("animated pulse");
+// // STYLE RELATED F(X):
+// $(function() 
+//   {
+//     $("#circleBtn").mouseenter(function(e) {
+//         $(this).addClass("animated pulse");
         
-    });
-    $("#circleBtn").on("webkitAnimationEnd mozAnimationEnd oAnimationEnd animationEnd", function(e) {
-        $(this).removeClass("animated pulse");
-    });
-  });
+//     });
+//     $("#circleBtn").on("webkitAnimationEnd mozAnimationEnd oAnimationEnd animationEnd", function(e) {
+//         $(this).removeClass("animated pulse");
+//     });
+//   });
+
 //click on food restriction icon and triggers api 
 //also has array of food ingredients for food search and food restriction diet
 
@@ -62,7 +63,7 @@ function runRestrictedDietAPI(restrictDietChoice, ingredients){
    }
 
 
- // Pantry Code Below
+ 
 var pantry = [];
 // Initialize Firebase
 var config = {
@@ -90,14 +91,13 @@ function pantryStorage(pantry){
 $("#pantry-input").on("click", function(event) {
   event.preventDefault();
       // console.log($("#pantry-add").val().trim());
-      pantry.push($("#pantry-add").val().trim());
+      pantry.push($("#basics").val().trim());
       console.log(pantry);
       console.log("added to pantry");
       $.each(pantry, function(index,value){
         $("#temporaryPantry").append(`<li> ${value}</li>`);
     });
       //add something tp clear out previour text
-      
   });
 
 $("#pantry-submit").on("click", function(event) {
@@ -106,9 +106,14 @@ $("#pantry-submit").on("click", function(event) {
 });
 
 database.ref("Pantry").on("child_added", function(childSnapshot) {
+    var expirationDT = moment().subtract(7, 'days').format('YYYY/MM/DD HH:mm:ss');
     var item = childSnapshot.val().item;
     var key = childSnapshot.key;
-    $(".pantry-current").append(`<span class="pantry-item" id="${key}""><a href='javascript:void(0);' class='remove'>&times;</a>${item}<a href='javascript:void(0);' class='add'>&#10010;</a><br><span>`);
+    if(moment(childSnapshot.val().dateAdded).format('YYYY/MM/DD HH:mm:ss') < expirationDT){
+        $(".pantry-current").append(`<span class="pantry-item spoiled" id="${key}"">Please check item for freshness! <a href='javascript:void(0);' class='remove'>&times;</a>${item}<a href='javascript:void(0);' class='add'>&#10010;</a><br><span>`);
+    }else{
+        $(".pantry-current").append(`<span class="pantry-item" id="${key}""><a href='javascript:void(0);' class='remove'>&times;</a>${item}<a href='javascript:void(0);' class='add'>&#10010;</a><br><span>`);
+    }
 });
 
 $(document).ready(function(){
@@ -129,5 +134,22 @@ $(document).ready(function(){
     });
 });
 
-
-
+var input = document.getElementById("basics");
+var awesomeplete = new Awesomplete(input);
+function recipeapicallback(fillData) {
+    awesomeplete.list = fillData;
+}
+var inString;
+$('#basics').on('input', function() {
+     inString = $(this).val();
+    getAutocomplete(inString);
+});
+function getAutocomplete(inString){
+    var queryURL = `http://api.edamam.com/auto-complete?q=${inString}&limit=10&app_id=cb021850&app_key=3f0c4b8c9adcb08d63cbde97230db9f8&callback=recipeapicallback`
+    $.ajax({
+        url: queryURL,
+        method: "GET",
+        dataType: 'jsonp'
+      });
+    
+};
