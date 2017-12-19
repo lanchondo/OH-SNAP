@@ -101,9 +101,14 @@ $("#pantry-submit").on("click", function(event) {
 });
 
 database.ref("Pantry").on("child_added", function(childSnapshot) {
+    var expirationDT = moment().subtract(7, 'days').format('YYYY/MM/DD HH:mm:ss');
     var item = childSnapshot.val().item;
     var key = childSnapshot.key;
-    $(".pantry-current").append(`<span class="pantry-item" id="${key}""><a href='javascript:void(0);' class='remove'>&times;</a>${item}<a href='javascript:void(0);' class='add'>&#10010;</a><br><span>`);
+    if(moment(childSnapshot.val().dateAdded).format('YYYY/MM/DD HH:mm:ss') < expirationDT){
+        $(".pantry-current").append(`<span class="pantry-item spoiled" id="${key}"">Please check item for freshness! <a href='javascript:void(0);' class='remove'>&times;</a>${item}<a href='javascript:void(0);' class='add'>&#10010;</a><br><span>`);
+    }else{
+        $(".pantry-current").append(`<span class="pantry-item" id="${key}""><a href='javascript:void(0);' class='remove'>&times;</a>${item}<a href='javascript:void(0);' class='add'>&#10010;</a><br><span>`);
+    }
 });
 
 $(document).ready(function(){
