@@ -1,14 +1,17 @@
-// // STYLE RELATED F(X):
-// $(function() 
-//   {
-//     $("#circleBtn").mouseenter(function(e) {
-//         $(this).addClass("animated pulse");
-        
-//     });
-//     $("#circleBtn").on("webkitAnimationEnd mozAnimationEnd oAnimationEnd animationEnd", function(e) {
-//         $(this).removeClass("animated pulse");
-//     });
-//   });
+// STYLE RELATED F(X):
+$(function() 
+  {
+    $("#circleBtn").mouseenter(function(e) {
+        $(this).addClass("animated pulse"); 
+    });
+    $(".remove").mouseenter(function(e) {
+      $(this).addClass("animated pulse"); 
+  });
+    $("#circleBtn").on("webkitAnimationEnd mozAnimationEnd oAnimationEnd animationEnd", function(e) {
+        $(this).removeClass("animated pulse");
+    });
+  });
+  
 
 //click on food restriction icon and triggers api 
 //also has array of food ingredients for food search and food restriction diet
@@ -49,11 +52,11 @@ function runRestrictedDietAPI(restrictDietChoice, ingredients){
               <div class="recipeLabel">
                 <h5>${value.recipe.label}</h5>
               </div>
-              <p class = "cals">Individual Serving Calories:${parseInt(value.recipe.calories/value.recipe.yield)}</p>
+              <p class = "cals">Individual Serving Calories: ${parseInt(value.recipe.calories/value.recipe.yield)}</p>
               <ul id="${index}">
               </ul>
               <button class="recipeBtn"><a href="${value.recipe.url}">Link to source</a></button>
-              <button class="nutBtn"><a href="#">Nutritional Value</a></button>  
+              <button class="nutBtn"><a href='javascript:void(0);'>Nutritional Value</a></button>  
             </div>
              `)
             $.each(value.recipe.ingredients, function(index, value){
@@ -86,16 +89,18 @@ function pantryStorage(pantry){
         database.ref("Pantry").push(pantryItem);
     });
     $("#temporaryPantry").empty();
+    console.log('temp pantry emptied')
 };
 
 $("#pantry-input").on("click", function(event) {
   event.preventDefault();
       // console.log($("#pantry-add").val().trim());
+    $("#temporaryPantry").empty();
       pantry.push($("#basics").val().trim());
       console.log(pantry);
       console.log("added to pantry");
       $.each(pantry, function(index,value){
-        $("#temporaryPantry").append(`<li> ${value}</li>`);
+        $("#temporaryPantry").append(`<li><i class="fa fa-cutlery" aria-hidden="true"></i> ${value}</li>`);
     });
       //add something tp clear out previour text
   });
@@ -110,9 +115,12 @@ database.ref("Pantry").on("child_added", function(childSnapshot) {
     var item = childSnapshot.val().item;
     var key = childSnapshot.key;
     if(moment(childSnapshot.val().dateAdded).format('YYYY/MM/DD HH:mm:ss') < expirationDT){
-        $(".pantry-current").append(`<span class="pantry-item spoiled" id="${key}"">Please check item for freshness! <a href='javascript:void(0);' class='remove'>&times;</a>${item}<a href='javascript:void(0);' class='add'>&#10010;</a><br><span>`);
+        $(".pantry-current").append(`<span class="pantry-item spoiled" id="${key}""><a href='javascript:void(0);' class='remove'>&cross;</a>${item}<a href='javascript:void(0);' class='add'>&check;</a><span>`);
     }else{
-        $(".pantry-current").append(`<span class="pantry-item" id="${key}""><a href='javascript:void(0);' class='remove'>&times;</a>${item}<a href='javascript:void(0);' class='add'>&#10010;</a><br><span>`);
+        $(".pantry-current").append(`
+          <span class="pantry-item" id="${key}"">
+            <a href='javascript:void(0);' class='remove'>&cross;</a>${item}<a href='javascript:void(0);' class='add'>&check;</a>
+          </span>`);
     }
 });
 
@@ -124,7 +132,7 @@ $(document).ready(function(){
         console.log(`Removed ID: ${removeID}`);
     });
     $(document).on("click", "a.add" , function() {
-        $(this).parent().css('background-color', 'gray');
+        $(this).parent().css('background-color', 'rgba(212, 177, 179,0.4)');
         var item = $(this).parent().text();
         //remove the special characters from the beginning and end of the ingredient
         item = item.slice(0, -1);
