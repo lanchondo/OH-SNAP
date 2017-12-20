@@ -40,7 +40,31 @@ function runRestrictedDietAPI(restrictDietChoice, ingredients){
      });    
 };
 
-   function createRecipeCards(response){
+  //  function createRecipeCards(response){
+  //   // $(".cardGroup").empty();
+  //      $.each(response.hits, function(index, value){
+  //       var hits = index;
+  //         $(".cardGroup").append(`
+  //           <div class="recipeCard">
+  //             <div class="imgDiv">
+  //               <img src="${value.recipe.image}" alt="${value.recipe.label}">
+  //             </div>
+  //             <div class="recipeLabel">
+  //               <h5>${value.recipe.label}</h5>
+  //             </div>
+  //             <p class = "cals">Individual Serving Calories: ${parseInt(value.recipe.calories/value.recipe.yield)}</p>
+  //             <ul id="${index}">
+  //             </ul>
+  //             <button class="recipeBtn"><a href="${value.recipe.url}">Link to source</a></button>
+  //             <button class="nutBtn"><a href='javascript:void(0);'>Nutritional Value</a></button>  
+  //           </div>
+  //            `)
+  //           $.each(value.recipe.ingredients, function(index, value){
+  //             $('#'+hits).append(`<li>${value.text}</li>`)  
+  //           })
+  //      });   
+  //  }
+  function createRecipeCards(response){
     // $(".cardGroup").empty();
        $.each(response.hits, function(index, value){
         var hits = index;
@@ -53,18 +77,40 @@ function runRestrictedDietAPI(restrictDietChoice, ingredients){
                 <h5>${value.recipe.label}</h5>
               </div>
               <p class = "cals">Individual Serving Calories: ${parseInt(value.recipe.calories/value.recipe.yield)}</p>
-              <ul id="${index}">
-              </ul>
+              
               <button class="recipeBtn"><a href="${value.recipe.url}">Link to source</a></button>
+              <button type="button" class="nutBtn" data-toggle="modal" data-target="#${hits}exampleModal">
+              Ingredients
+            </button>
+            <!-- Modal -->
+            <div class="modal fade" id="${hits}exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="${hits}exampleModalLabel">Ingredient List</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                  <ul id="${hits}">
+                  </ul>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  </div>
+                </div>
+              </div>
+            </div>
               <button class="nutBtn"><a href='javascript:void(0);'>Nutritional Value</a></button>  
             </div>
              `)
             $.each(value.recipe.ingredients, function(index, value){
+              
               $('#'+hits).append(`<li>${value.text}</li>`)  
             })
        });   
    }
-
 
  
 var pantry = [];
@@ -125,22 +171,36 @@ database.ref("Pantry").on("child_added", function(childSnapshot) {
 });
 
 $(document).ready(function(){
-    $(document).on("click", "a.remove" , function() {
-        $(this).parent().remove();
-        removeID = $(this).parent().attr("id");
-        database.ref("Pantry/" + removeID).remove();
-        console.log(`Removed ID: ${removeID}`);
-    });
+  //remove pantry items from firebase database
+  $(document).on("click", "a.remove" , function() {
+    $(this).parent().remove();
+    removeID = $(this).parent().attr("id");
+    database.ref("Pantry/" + removeID).remove();
+    console.log(`Removed ID: ${removeID}`);
+  });
+    //add pantry items to ingredient search list
     $(document).on("click", "a.add" , function() {
-        $(this).parent().css('background-color', 'rgba(212, 177, 179,0.4)');
-        var item = $(this).parent().text();
-        //remove the special characters from the beginning and end of the ingredient
-        item = item.slice(0, -1);
-        item = item.substr(1);
-        console.log(item);
+      var item = $(this).parent().text();
+      //remove the special characters from the beginning and end of the ingredient
+      item = item.slice(0, -1);
+      item = item.substr(1);
+      console.log($(this).attr("id"));
+      if ($(this).attr("id") == "added") {
+        console.log("Item removed: " + item);
+        $(this).parent().css('background-color', 'transparent');
+        var i = ingredients.indexOf(item);
+        ingredients.splice(i, 1);//remove the clicked item fron the ingreidients search
+        $(this).attr("id", "removed")
+        console.log(ingredients);
+      } else {
+        console.log("Item added: " + item);
+        $(this).parent().css('background-color', 'rgba(246, 65, 107, 0.2)');
         ingredients.push(item);
+        console.log(ingredients);
+        $(this).attr("id", "added")
+      }
     });
-});
+  });
 
 var input = document.getElementById("basics");
 var awesomeplete = new Awesomplete(input);
