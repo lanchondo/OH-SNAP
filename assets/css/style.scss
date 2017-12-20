@@ -3,7 +3,7 @@ $white: #fafafa;
 $shadow:#b3b1b3;
 $purple: #7d32b5;
 $text: #675C52;
-$pink: #F6406B;
+$pink: rgb(246, 65, 107);
 $opaqueWhite: rgba(250, 250, 250, 0.9);
 
 //mixins
@@ -224,6 +224,10 @@ footer {
     margin-right: 0.4em;
   }
 }
+.fireEdam{
+  display:flex;
+  flex-wrap: wrap;
+}
 #pantry-add{
   flex-basis: 70%;
 }
@@ -270,6 +274,7 @@ footer {
 .pantrySearch {
   background-color: $opaqueWhite;
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
   margin-top: 1em;
   @media screen and (min-width: 768px){
@@ -301,19 +306,33 @@ footer {
 //API MONEY!
 .cardGroup{
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
   align-items: center;
   margin-top: 1em;
   background-color: $opaqueWhite;
   justify-content: center;
   align-items: flex-start;
+  @media screen and (min-width: 440px){
+    justify-content: space-between;
+  }
+  @media screen and (min-width: 768px){
+    justify-content: space-around;
+  }
 }
 .recipeCard {
   display: flex;
   flex-direction: column;
   margin-bottom: 0.5em;
   padding: 0.5em;
-  width: 17em;
+  flex-basis: 90%;
+  @media screen and (min-width: 440px){
+    flex-basis: 48%;
+    @include shadow(0, 0, 1px, 1px, $shadow);
+  }
+  @media screen and (min-width: 768px){
+    flex-basis: 45%;
+    @include shadow(0, 0, 1px, 1px, $shadow);
+  }
   @include shadow(0, 0, 10px, 3px, $shadow);
   img{
     width:100%;

@@ -28,7 +28,7 @@ li {
   color: #675C52; }
 
 .nav {
-  background-color: #F6406B;
+  background-color: #f6416b;
   width: 100%; }
 
 .jumbotron {
@@ -72,7 +72,7 @@ button {
   color: #fafafa; }
 
 footer {
-  background-color: #F6406B;
+  background-color: #f6416b;
   padding: 0.7em;
   width: 100%;
   height: 50px;
@@ -185,6 +185,10 @@ footer {
     color: #675C52;
     margin-right: 0.4em; }
 
+.fireEdam {
+  display: flex;
+  flex-wrap: wrap; }
+
 #pantry-add {
   flex-basis: 70%; }
 
@@ -193,7 +197,7 @@ footer {
   text-shadow: 0px 0px 2px #243f05; }
 
 .remove {
-  color: #F6406B;
+  color: #f6416b;
   margin-right: 0.1em; }
 
 .add {
@@ -230,6 +234,7 @@ footer {
 .pantrySearch {
   background-color: rgba(250, 250, 250, 0.9);
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
   margin-top: 1em; }
   @media screen and (min-width: 768px) {
@@ -257,25 +262,39 @@ footer {
 
 .cardGroup {
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
   align-items: center;
   margin-top: 1em;
   background-color: rgba(250, 250, 250, 0.9);
   justify-content: center;
   align-items: flex-start; }
+  @media screen and (min-width: 440px) {
+    .cardGroup {
+      justify-content: space-between; } }
+  @media screen and (min-width: 768px) {
+    .cardGroup {
+      justify-content: space-around; } }
 
 .recipeCard {
   display: flex;
   flex-direction: column;
   margin-bottom: 0.5em;
   padding: 0.5em;
-  width: 17em;
+  flex-basis: 90%;
   box-shadow: 0 0 10px 3px #b3b1b3; }
+  @media screen and (min-width: 440px) {
+    .recipeCard {
+      flex-basis: 48%;
+      box-shadow: 0 0 1px 1px #b3b1b3; } }
+  @media screen and (min-width: 768px) {
+    .recipeCard {
+      flex-basis: 45%;
+      box-shadow: 0 0 1px 1px #b3b1b3; } }
   .recipeCard img {
     width: 100%; }
 
 .recipeLabel {
-  background-color: #F6406B;
+  background-color: #f6416b;
   padding-top: 0.5em;
   padding-bottom: 0.1em;
   text-align: center; }
