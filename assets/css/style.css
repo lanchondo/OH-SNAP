@@ -69,7 +69,8 @@ button {
   background-color: #7d32b5;
   border: 1px solid #675C52;
   border-radius: 10px;
-  color: #fafafa; }
+  color: #fafafa;
+  cursor: pointer; }
 
 footer {
   background-color: #f6416b;
@@ -294,7 +295,7 @@ footer {
     width: 100%; }
 
 .recipeLabel {
-  background-color: #f6416b;
+  background-color: #d8cfe4;
   padding-top: 0.5em;
   padding-bottom: 0.1em;
   text-align: center; }
