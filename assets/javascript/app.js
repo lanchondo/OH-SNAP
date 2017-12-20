@@ -38,6 +38,13 @@ function getAutocomplete(inString){
         //adds pantry items to persisting source
         //pantryStorage(pantry);
     });
+      //add something tp clear out previour text
+ 
+
+$("#pantry-submit").on("click", function(event) {
+    console.log("submitting pantry...");
+    pantryStorage(pantry);
+});
 
 //runs retricted diet recipe search API
     function runRestrictedDietAPI(restrictDietChoice, ingredients){

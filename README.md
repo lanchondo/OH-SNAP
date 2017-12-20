@@ -21,3 +21,9 @@ https://trello.com/b/jDv8BWq1/ideas-notes-apis
 
 PRESENTATION:
 https://docs.google.com/presentation/d/1RbgqWWyeMj-ioLJtXHQw5VWQ6dCsJ58oCwxj0zlzHPQ/edit?usp=sharing
+<<<<<<< HEAD
+=======
+
+Git:
+ https://lanchondo.github.io/OH-SNAP/
+>>>>>>> 9e1bb2eea5cb916f5c66443191b4fb84a02ecea4
